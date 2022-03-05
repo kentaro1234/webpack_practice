@@ -28,15 +28,7 @@ module.exports = {
         generator: {
           filename: 'images/[name][ext]'
         },
-        use: [
-          // {
-          //   loader: 'file-loader',
-          //   options: {
-          //     esModule: false,
-          //     name: 'images/[name].[ext]'
-          //   }
-          // }
-        ]
+        use: []
       }
     ]
   },
