@@ -9,16 +9,22 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'javascripts/main.js'
   },
+  devServer: {
+    liveReload: true
+  },
   module: {
     rules: [
       {
-        test: /\.css/,
+        test: /\.(css|sass|scss)/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
           }
         ]
       },
@@ -58,6 +64,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/templates/access.pug',
       filename: 'access.html',
+      inject: 'body'
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/templates/members/taro.pug',
+      filename: 'members/taro.html',
       inject: 'body'
     }),
     new CleanWebpackPlugin()
