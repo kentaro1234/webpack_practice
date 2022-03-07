@@ -2,6 +2,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+// const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
   mode: 'development',
@@ -17,14 +19,24 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'vue-loader'
+          }
+        ]
+      },
+      {
         test: /\.js/,
-        exclude: /node__modules/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
             options: {
               presets: [
-                ['@babel/preset-env', { 'targets': '> 0.25%, not dead' }]
+                ['@babel/preset-env', { 'targets': '> 0.25%, not dead' }],
+                '@babel/preset-react'
               ]
             }
           }
@@ -82,6 +94,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: './stylesheets/main.css'
     }),
